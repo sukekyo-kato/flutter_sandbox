@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../app.dart';
+import '../feature/auth/presentation/entry_page.dart';
 
 part 'router.g.dart';
 
@@ -17,15 +17,14 @@ final routerProvider = Provider<GoRouter>((ref) {
   );
 });
 
-@TypedGoRoute<DummyHomePageRoute>(
+@TypedGoRoute<EntryPageRoute>(
   path: '/',
 )
 
-/// 仮起動画面
-class DummyHomePageRoute extends GoRouteData {
-  const DummyHomePageRoute();
+/// 起動画面
+class EntryPageRoute extends GoRouteData {
+  const EntryPageRoute();
 
   @override
-  Widget build(BuildContext context, GoRouterState state) =>
-      const DummyLauchPage();
+  Widget build(BuildContext context, GoRouterState state) => const EntryPage();
 }

@@ -7,17 +7,17 @@ part of 'router.dart';
 // **************************************************************************
 
 List<RouteBase> get $appRoutes => [
-      $dummyHomePageRoute,
+      $entryPageRoute,
     ];
 
-RouteBase get $dummyHomePageRoute => GoRouteData.$route(
+RouteBase get $entryPageRoute => GoRouteData.$route(
       path: '/',
-      factory: $DummyHomePageRouteExtension._fromState,
+      factory: $EntryPageRouteExtension._fromState,
     );
 
-extension $DummyHomePageRouteExtension on DummyHomePageRoute {
-  static DummyHomePageRoute _fromState(GoRouterState state) =>
-      const DummyHomePageRoute();
+extension $EntryPageRouteExtension on EntryPageRoute {
+  static EntryPageRoute _fromState(GoRouterState state) =>
+      const EntryPageRoute();
 
   String get location => GoRouteData.$location(
         '/',
