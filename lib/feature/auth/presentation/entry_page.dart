@@ -1,38 +1,56 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../common_widget/overlay_loading.dart';
+import '../application/auth_service.dart';
 
 /// 初期ページ
-class EntryPage extends StatelessWidget {
+class EntryPage extends ConsumerWidget {
   const EntryPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final loggingState = ref.watch(loggingStateProvider);
+
     return Scaffold(
       body: SafeArea(
-        child: Column(
+        child: Stack(
           children: [
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: _titiles(),
-              ),
+            Column(
+              children: [
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: _titiles(),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Column(
+                    children: [
+                      ..._buttons(ref),
+                      const SizedBox(height: 10),
+                      _terms(),
+                      const SizedBox(height: 10),
+                      _copyrights()
+                    ],
+                  ),
+                ),
+              ],
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Column(
-                children: [
-                  ..._buttons(),
-                  const SizedBox(height: 10),
-                  _terms(),
-                  const SizedBox(height: 10),
-                  _copyrights()
-                ],
-              ),
-            ),
+            _loading(loggingState.isLoading),
           ],
         ),
       ),
     );
+  }
+
+  /// 読み込み中
+  Widget _loading(bool isLoading) {
+    return isLoading
+        ? const OverlayCircularProgress()
+        : const SizedBox.shrink();
   }
 
   /// タイトル部
@@ -52,12 +70,12 @@ class EntryPage extends StatelessWidget {
   }
 
   /// ボタン類
-  List<Widget> _buttons() {
+  List<Widget> _buttons(WidgetRef ref) {
     return [
       SizedBox(
         width: 200,
         child: ElevatedButton(
-          onPressed: () => {},
+          onPressed: () => ref.read(authServiceProvider).signInAnnoynously(),
           child: const Text('新規登録'),
         ),
       ),
@@ -67,7 +85,8 @@ class EntryPage extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.lightBlue,
           ),
-          onPressed: () => {},
+          // TODO: 擬似なので同じ処理にしておく。
+          onPressed: () => ref.read(authServiceProvider).signInAnnoynously(),
           child: const Text('ログイン'),
         ),
       ),
