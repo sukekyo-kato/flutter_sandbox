@@ -5,6 +5,9 @@ final loggingStateProvider = StateProvider<AsyncValue<void>>(
   (_) => const AsyncData(null),
 );
 
+/// ログイン状態
+final loginStateProvider = StateProvider<bool>((ref) => false);
+
 final authServiceProvider = Provider((ref) {
   return AuthService(ref);
 });
@@ -23,6 +26,8 @@ class AuthService {
       ..state = await AsyncValue.guard(() async {
         // TODO: Firebase等のログインに繋げる
         await Future<void>.delayed(const Duration(seconds: 3));
+        // ログイン状態更新
+        ref.read(loginStateProvider.notifier).state = true;
       });
   }
 }

@@ -1,0 +1,18 @@
+import 'package:flutter/material.dart';
+
+/// ユーザページ
+class UserPage extends StatelessWidget {
+  const UserPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Flutter Sandbox'),
+      ),
+      body: SafeArea(
+        child: Container(),
+      ),
+    );
+  }
+}
