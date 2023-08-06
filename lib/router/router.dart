@@ -21,6 +21,11 @@ final routerProvider = Provider<GoRouter>((ref) {
       if (state.fullPath == EntryPageRoute.path && loginState) {
         return '/user/tab/a';
       }
+
+      // ログアウト時、エントリー画面以外の場合
+      if (state.fullPath != EntryPageRoute.path && !loginState) {
+        return EntryPageRoute.path;
+      }
       return null;
     },
   );
