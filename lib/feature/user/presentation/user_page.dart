@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../common_widget/scaffold_message.dart';
 import '../application/user_service.dart';
 
 export 'part/user_tab_a.dart';
@@ -63,7 +64,10 @@ class UserPage extends StatelessWidget {
               // 連打防止
               state.isLoading
                   ? null
-                  : () => ref.read(userServiceProvider).logout(),
+                  : () => ref
+                      .read(userServiceProvider)
+                      .logout()
+                      .then((_) => showRootScaffoldMessage('ログアウトしました。')),
           icon: const Icon(Icons.logout),
         );
       },

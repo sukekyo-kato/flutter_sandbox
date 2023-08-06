@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../common_widget/overlay_loading.dart';
+import '../../../common_widget/scaffold_message.dart';
 import '../application/auth_service.dart';
 
 /// 初期ページ
@@ -75,7 +76,10 @@ class EntryPage extends ConsumerWidget {
       SizedBox(
         width: 200,
         child: ElevatedButton(
-          onPressed: () => ref.read(authServiceProvider).signInAnnoynously(),
+          onPressed: () => ref
+              .read(authServiceProvider)
+              .signInAnnoynously()
+              .then((_) => showRootScaffoldMessage('ログインしました。')),
           child: const Text('新規登録'),
         ),
       ),

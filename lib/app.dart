@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
+import 'common_widget/scaffold_message.dart';
 import 'router/router.dart';
 
 class App extends ConsumerWidget {
@@ -13,6 +14,7 @@ class App extends ConsumerWidget {
     final router = ref.watch(routerProvider);
     return MaterialApp.router(
       title: 'Flutter Sandbox',
+      scaffoldMessengerKey: rootScaffoldKey,
       localizationsDelegates: L10n.localizationsDelegates,
       supportedLocales: L10n.supportedLocales,
       routeInformationProvider: router.routeInformationProvider,
