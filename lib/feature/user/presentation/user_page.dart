@@ -16,6 +16,7 @@ class UserPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('User Page'),
+        actions: _appBarActions(),
       ),
       body: navigationShell,
       // ボトムバー
@@ -38,5 +39,15 @@ class UserPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  List<Widget> _appBarActions() {
+    return [
+      // ログアウト
+      IconButton(
+        onPressed: () {},
+        icon: const Icon(Icons.logout),
+      )
+    ];
   }
 }
